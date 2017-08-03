@@ -1,7 +1,6 @@
 # Project Name
 
-	Help users retrive lost items.
-	Your friendly internet lost and found box.
+> Pithy project description
 
 ## Team
 
@@ -21,12 +20,15 @@
 
 ## Usage
 
-	Login to post items you have either lost or found. Be alerted when there is a match. Chat with your match to set up location and time for item exchange.
+> Some usage instructions
 
 ## Requirements
 
-- Node 	6.11.1
-- npm	5.3.0
+- Node 0.10.x
+- Redis 2.6.x
+- Postgresql 9.1.x
+- etc
+- etc
 
 ## Development
 
@@ -34,11 +36,15 @@
 
 From within the root directory:
 
+```sh
+sudo npm install -g bower
 npm install
+bower install
+```
 
 ### Roadmap
 
-View the project roadmap [here](https://github.com/CharmingChimps/lostandfound/issues)
+View the project roadmap [here](LINK_TO_PROJECT_ISSUES)
 
 
 ## Contributing
