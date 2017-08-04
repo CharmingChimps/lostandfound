@@ -5,7 +5,7 @@ const { router } = require('./lib/routes');
 const session = require('express-session');
 
 
-mongoose.connect('mongodb://dbadmin:hrnyc9@ds129053.mlab.com:29053/hrnyc9lostandfound', {
+mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds135983.mlab.com:35983/hrnyc9chimps', {
   useMongoClient: true,
 });
 
