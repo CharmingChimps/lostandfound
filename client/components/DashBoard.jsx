@@ -41,8 +41,8 @@ class DashBoard extends React.Component {
   }
 
   goToMessenger(user, toUser) {
-    this.setLocation('messenger');
     this.setState({ chat: { user, toUser } });
+    this.setLocation('messenger');
   }
 
   render() {

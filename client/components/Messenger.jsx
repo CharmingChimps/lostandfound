@@ -22,7 +22,7 @@ class Messenger extends React.Component {
 
   componentDidMount() {
     this.handleGet();
-    setInterval(this.handleGet.bind(this), 1000);
+    this.interval = setInterval(this.handleGet.bind(this), 1000);
   }
   //CHANGE TO POST TO SERVER
   handlePost(messageObj) {
@@ -94,7 +94,11 @@ class Messenger extends React.Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        <button onClick={this.props.setLocation.bind(this, 'dash')}>Back</button>
+        <button onClick={() => {
+          this.props.setLocation('dash');
+          clearInterval(this.interval);
+        }}
+        >Back</button>
       </div>
     );
   }
