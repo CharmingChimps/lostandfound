@@ -1,25 +1,41 @@
-const db = require('../../../db/config');
+const { lost, found } = require('../../../db/config');
+const { promisify } = require('bluebird');
 
-const objectCompare = (object1, object2) => {
-  let results = 0;
-  for (const key in object2) {
-    if (object1[key] === object2[key]) {
-      results += 1;
-    }
-  }
-  return results >= 3;
-};
+const findAllFoundPromise = promisify(found.find.bind(found));
+const findAllLostPromise = promisify(lost.find.bind(lost));
 
-module.exports = (item, status, callback) => {
-  db[status].find({ returned: false })
-    .then((data) => {
-      item.matches = [];
-      data.forEach((object) => {
-        if (item.location === object.location && item.name === object.name && objectCompare(item.description, object.description)) {
-          item.matches.push(object);
-          db[status].update(object, { $push: item });
-        }
+exports.matchLostItem = item =>
+  findAllFoundPromise({
+    returned: false,
+    name: item.name,
+    location: item.location,
+  })
+    .then((matches) => {
+      if (matches.length < 1) return;
+      const newItemMatches = item.matches.slice();
+      matches.forEach((match) => {
+        const newMatches = match.matches.slice();
+        newMatches.push(item);
+        found.update({ _id: match._id }, { matches: newMatches }, () => '');
+        newItemMatches.push(match);
       });
-      callback(item);
+      lost.update({ _id: item._id }, { matches: newItemMatches }, () => '');
     });
-};
+
+exports.matchFoundItem = item =>
+  findAllLostPromise({
+    returned: false,
+    name: item.name,
+    location: item.location,
+  })
+    .then((matches) => {
+      if (matches.length < 1) return;
+      const newItemMatches = item.matches.slice();
+      matches.forEach((match) => {
+        const newMatches = match.matches.slice();
+        newMatches.push(item);
+        lost.update({ _id: match._id }, { matches: newMatches }, () => '');
+        newItemMatches.push(match);
+      });
+      found.update({ _id: item._id }, { matches: newItemMatches }, () => '');
+    });
