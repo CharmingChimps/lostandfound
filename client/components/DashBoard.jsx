@@ -47,7 +47,7 @@ class DashBoard extends React.Component {
 
   render() {
     if (this.state.location === 'lost') {
-      return (<ItemForm type="Lost" />);
+      return (<ItemForm setLocation={this.setLocation} type="Lost" />);
     } else if (this.state.location === 'found') {
       return (<ItemForm setLocation={this.setLocation} type="Found" />);
     } else if (this.state.location === 'messenger') {
