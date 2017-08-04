@@ -51,7 +51,7 @@ class DashBoard extends React.Component {
     } else if (this.state.location === 'found') {
       return (<ItemForm setLocation={this.setLocation} type="Found" />);
     } else if (this.state.location === 'messenger') {
-      return (<Messenger />);
+      return (<Messenger userId={this.state.chat.user} toUserId={this.state.chat.user} />);
     }
     return (
       <div>

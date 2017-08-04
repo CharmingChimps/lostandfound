@@ -38,9 +38,9 @@ exports.getStatus = (req, res) => {
 
 exports.postMessages = (req, res) => {
   //user id
-  var user_id = '598482b4f5b143079c100ae1';
+  var user_id = req.body.user_id;
   //to user id
-  var to_user_id = '598485926f27672c68fc9835';
+  var to_user_id = req.body.to_user_id;
   //req.body = message
   var message = req.body.text;
   var messageObj = {
@@ -58,16 +58,17 @@ exports.postMessages = (req, res) => {
 };
 
 exports.getMessages = (req, res) => {
-    //user id
-  var user_id = '598482b4f5b143079c100ae1';
+  //user id
+  var user_id = req.query.user_id;
   //to user id
-  var to_user_id = '598485926f27672c68fc9835';
+  var to_user_id = req.query.to_user_id;
+  //req.body = message
   db.messages.find({
     user_id: user_id,
     to_user_id: to_user_id
   })
   .limit(20)
-  .sort('-date')
+  .sort({date: 'desc'})
   .then((items) => {
     res.send(items);
     // console.log('data in getMessages()', data)
