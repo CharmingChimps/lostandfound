@@ -17,6 +17,8 @@ class MenuBar extends React.Component {
     const barStyle = {
       display: 'flex',
       justifyContent: 'space-around',
+      backgroundColor: '#8BA5B2',
+      alignItems: 'center',
     };
 
     return (

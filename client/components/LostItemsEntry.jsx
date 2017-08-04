@@ -3,10 +3,9 @@ import React from 'react';
 class LostItemsEntry extends React.Component {
   render() {
     return (
-      <div>
-        <p>--ITEM--</p>
+      <div className="entries">
+        <p className="itemsName">{this.props.name}</p>
         <ul>
-          <li>Name: {this.props.name}</li>
           <li>Location: {this.props.location}</li>
           <li>Description:
             <ul>

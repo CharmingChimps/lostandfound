@@ -44,11 +44,11 @@ class ItemForm extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="form">
 
         <h2>{this.props.type} Item Form</h2>
 
-        <form onSubmit={this.handleSubmit}>
+        <form className="form" onSubmit={this.handleSubmit}>
           <p>Item Name:</p>
           <input
             type="text"

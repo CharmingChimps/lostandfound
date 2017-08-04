@@ -62,7 +62,7 @@ class DashBoard extends React.Component {
     return (
       <div>
         <MenuBar checkStatus={this.props.checkStatus} setLocation={this.setLocation} />
-        <div>
+        <div className="dashItems">
           <FoundItems items={this.state.data ? this.state.data.found : []}
             goToMessenger={this.goToMessenger}
           />

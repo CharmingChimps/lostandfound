@@ -4,7 +4,7 @@ import LostItemsEntry from './LostItemsEntry.jsx';
 class LostItems extends React.Component {
   render() {
     return (
-      <div>
+      <div className="itemsBox">
         <h2>Lost Items</h2>
         {this.props.items.map(item => (
           <LostItemsEntry

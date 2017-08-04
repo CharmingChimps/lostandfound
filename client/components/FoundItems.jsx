@@ -4,7 +4,7 @@ import FoundItemsEntry from './FoundItemsEntry.jsx';
 class FoundItems extends React.Component {
   render() {
     return (
-      <div>
+      <div className="foundItemsBox">
         <h2>Found Items</h2>
         {this.props.items.map(item => (
           <FoundItemsEntry
