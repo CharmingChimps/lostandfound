@@ -65,8 +65,8 @@ exports.getMessages = (req, res) => {
   // req.body = message
   db.messages.find({ $or: [
     {
-      user_id: user_id,
-      to_user_id: to_user_id,
+      user_id: to_user_id,
+      to_user_id: user_id,
     },
     {
       user_id: to_user_id,
@@ -76,7 +76,9 @@ exports.getMessages = (req, res) => {
     .limit(20)
     .sort({ date: 'desc' })
     .then((items) => {
-      console.log(items);
+      console.log('items', items,
+        '\n user_id', user_id,
+        '\n to_user_id', to_user_id);
       res.send(items);
     });
 
