@@ -63,9 +63,10 @@ class Login extends React.Component {
                 ref="password"
               />
             </label>
-            <input type="submit" value="Submit" />
+            <button class="buttons" type="submit">Submit</button>
           </form>
-          <button onClick={this.toggleSignUp}>Sign Up</button>
+          <br />
+          <button class="buttons" onClick={this.toggleSignUp}>Sign Up</button>
         </div>
       );
     }
