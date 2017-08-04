@@ -17,9 +17,7 @@ module.exports = (item, status, callback) => {
       data.forEach((object) => {
         if (item.location === object.location && item.name === object.name && objectCompare(item.description, object.description)) {
           item.matches.push(object);
-          const updatedObject = Object.assign({}, object);
-          updatedObject.matches.push(item);
-          db[status].update(object, { matches: updatedObject.matches });
+          db[status].update(object, { $push: item });
         }
       });
       callback(item);

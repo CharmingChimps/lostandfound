@@ -65,7 +65,7 @@ exports.getMatches = (req, res) => {
   getUserId(req.session.user, (userId) => {
     db.found.find({ user_id: userId })
       .then((data) => {
-        data = data.filter(item => item.matches.length > 0);
+        data = data.filter(item => item.matches.length > 0 && item.matches.found === false);
         res.send(data);
       });
   });
