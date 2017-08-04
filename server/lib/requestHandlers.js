@@ -1,37 +1,33 @@
 const db = require('../../db/config');
-const checkMatches = require('./controllers/matchhandler');
+const { matchLostItem, matchFoundItem } = require('./controllers/matchhandler');
+const { getUserId } = require('./utils');
+const { promisify } = require('bluebird');
 
-function getUserId(user, callback) {
-  db.user.findOne({ username: user })
-    .then((userObject) => {
-      callback(userObject._id);
-    });
-}
+const createLostPromise = promisify(db.lost.create.bind(db.lost));
+const createFoundPromise = promisify(db.found.create.bind(db.found));
 
 exports.postLostItem = (req, res) => {
-  req.session.user = req.session.user || 'frank';
-  checkMatches(req.body, 'lost', (item) => {
-    getUserId(req.session.user, (userId) => {
+  // req.session.user = req.session.user || 'frank';
+  const item = req.body;
+  getUserId(req.session.user)
+    .then((userId) => {
       item.user_id = userId;
-      db.lost.create(item, (err) => {
-        if (err) throw err;
-      });
+      createLostPromise(item)
+        .then(() => matchLostItem(item))
+        .then(() => res.send('post success'));
     });
-  });
-  res.send('success on post lost item');
 };
 
 exports.postFoundItem = (req, res) => {
-  req.session.user = req.session.user || 'barney';
-  checkMatches(req.body, 'found', (item) => {
-    getUserId(req.session.user, (userId) => {
+  // req.session.user = req.session.user || 'frank';
+  const item = req.body;
+  getUserId(req.session.user)
+    .then((userId) => {
       item.user_id = userId;
-      db.found.create(item, (err) => {
-        if (err) throw err;
-      });
+      createFoundPromise(item)
+        .then(found => matchFoundItem(found))
+        .then(() => res.send('post success'));
     });
-  });
-  res.send('success on post found item');
 };
 
 exports.getStatus = (req, res) => {

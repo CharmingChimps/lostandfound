@@ -37,7 +37,7 @@ const LostSchema = new Schema({
     condition: String,
     size: String,
   },
-  returned: Boolean,
+  returned: { type: Boolean, default: false },
 });
 
 const Lost = mongoose.model('Lost', LostSchema);
@@ -54,7 +54,7 @@ const FoundSchema = new Schema({
     condition: String,
     size: String,
   },
-  returned: Boolean,
+  returned: { type: Boolean, default: false },
 });
 
 const Found = mongoose.model('Found', FoundSchema);

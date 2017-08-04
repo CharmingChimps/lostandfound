@@ -3,7 +3,6 @@ import LostItemsEntry from './LostItemsEntry.jsx';
 
 class LostItems extends React.Component {
   render() {
-    console.log('lost items', this.props.items);
     return (
       <div>
         <h2>Lost Items</h2>
@@ -12,6 +11,7 @@ class LostItems extends React.Component {
             name={item.name}
             location={item.location}
             description={item.description}
+            matches={item.matches}
           />
         ))}
       </div>
