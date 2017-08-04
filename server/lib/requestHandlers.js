@@ -41,23 +41,50 @@ exports.getStatus = (req, res) => {
 
 
 exports.postMessages = (req, res) => {
-  db.messages.create(req.body, (err) => {
+  //user id
+  var user_id = '598482b4f5b143079c100ae1';
+  //to user id
+  var to_user_id = '598485926f27672c68fc9835';
+  //req.body = message
+  var message = req.body.text;
+  var messageObj = {
+    user_id: user_id,
+    text: message,
+    to_user_id: to_user_id
+  }
+  //send to server
+  // console.log('INSIDE POST MESSAGE: ', req.body.text);
+  db.messages.create(messageObj, (err) => {
     if (err) throw err;
-
     // must still write here check data base as a call back
   });
-  res.send('success on post messages');
+  res.send('success on post messages updated');
 };
 
 exports.getMessages = (req, res) => {
+    //user id
+  var user_id = '598482b4f5b143079c100ae1';
+  //to user id
+  var to_user_id = '598485926f27672c68fc9835';
+  db.messages.find({
+    user_id: user_id,
+    to_user_id: to_user_id
+  })
+  .limit(20)
+  .sort('-date')
+  .then((items) => {
+    res.send(items);
+    // console.log('data in getMessages()', data)
+  })
+
   // console.log('getMessages', req.body);
-  getUserId(req.session.user, (userId) => {
-    getUserId(req.query.to_user, (toUserId) => {
-      db.messages.find({ user_id: userId, to_user_id: toUserId })
-        .then(res.send.bind(res));
-    });
-    //WAITING FOR WALTER
-  });
+  // getUserId(req.session.user, (userId) => {
+  //   getUserId(req.query.to_user, (toUserId) => {
+  //     db.messages.find({ user_id: userId, to_user_id: toUserId })
+  //       .then(res.send.bind(res));
+  //   });
+  //   //WAITING FOR WALTER
+  // });
 };
 
 exports.getMatches = (req, res) => {
