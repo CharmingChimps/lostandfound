@@ -34,10 +34,10 @@ class Login extends React.Component {
   render() {
     if (!this.state.signUp) {
       return (
-        <div>
+        <div className="form">
           <h1>Chimp Login</h1>
-          <form>
-            <label>
+          <form className="form">
+            <label className="form">
               <br />
                 Please enter your username B
               <br />
@@ -50,8 +50,8 @@ class Login extends React.Component {
               />
             </label>
           </form>
-          <form onSubmit={this.handleSubmit.bind(this)} >
-            <label>
+          <form className="form" onSubmit={this.handleSubmit.bind(this)} >
+            <label className="form">
               <br />
                 Bananas for passwords
               <br />
