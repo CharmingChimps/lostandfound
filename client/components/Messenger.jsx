@@ -22,6 +22,7 @@ class Messenger extends React.Component {
 
   componentDidMount() {
     this.handleGet();
+    setInterval(this.handleGet.bind(this), 1000);
   }
   //CHANGE TO POST TO SERVER
   handlePost(messageObj) {
@@ -41,9 +42,13 @@ class Messenger extends React.Component {
     axios({
       method:'GET',
       url: '/messages',
+      params: {
+        user_id: this.props.userId,
+        to_user_id: this.props.toUserId
+      }
     })
     .then((res) => {
-      this.setState({messages: res.data})
+      this.setState({messages: res.data.reverse()})
       // console.log('res.data in handleGet', res.data)
     })
   }
@@ -56,12 +61,16 @@ class Messenger extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     const message = this.state.message;
-    const messageObj = {
-      text: message,
-    };
-    // this.setState({ messages: [...this.state.messages, message], message: '' });
-    this.setState({ message: '' });
-    this.handlePost(messageObj);
+    if (message.replace(/[\s]/g, '') !== '') {
+      const messageObj = {
+        text: message,
+        user_id: this.props.userId,
+        to_user_id: this.props.toUserId
+      };
+      // this.setState({ messages: [...this.state.messages, message], message: '' });
+      this.setState({ message: '' });
+      this.handlePost(messageObj);
+    }
     // this.handleGet();
   }
 
