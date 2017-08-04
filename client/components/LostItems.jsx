@@ -12,6 +12,8 @@ class LostItems extends React.Component {
             location={item.location}
             description={item.description}
             matches={item.matches}
+            goToMessenger={this.props.goToMessenger}
+            userId={item.user_id}
           />
         ))}
       </div>

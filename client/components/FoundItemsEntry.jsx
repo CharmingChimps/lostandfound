@@ -32,7 +32,6 @@ class FoundItemsEntry extends React.Component {
                   </li>
                   <li><button
                     onClick={() => {
-                      console.log(this.props);
                       this.props.goToMessenger(this.props.userId, match.user_id);
                     }}
                   >Messenger</button></li>
