@@ -27,7 +27,6 @@ class Login extends React.Component {
       params: { username, password },
     })
       .then((res) => {
-        console.log('res', res);
         this.props.checkStatus();
       });
   }
@@ -58,7 +57,7 @@ class Login extends React.Component {
               <br />
               <input
                 id="inputPassword"
-                type="text"
+                type="password"
                 placeholder="Enter chimp password"
                 ref="password"
               />
@@ -70,7 +69,7 @@ class Login extends React.Component {
       );
     }
     return (
-      <SignUp toggleSignUp={this.toggleSignUp} />
+      <SignUp checkStatus={this.props.checkStatus} toggleSignUp={this.toggleSignUp} />
     );
   }
 }

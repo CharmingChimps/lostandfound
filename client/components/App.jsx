@@ -31,7 +31,7 @@ class App extends React.Component {
 
   render() {
     return this.state.isLoggedIn ?
-      (<DashBoard />) :
+      (<DashBoard checkStatus={this.checkStatus} />) :
       (<Login checkStatus={this.checkStatus} />);
   }
 }

@@ -22,7 +22,6 @@ class DashBoard extends React.Component {
   }
 
   setLocation(location) {
-    console.log('setting location to:', location);
     if (location === 'dash') {
       this.getDashData();
     }
@@ -30,16 +29,15 @@ class DashBoard extends React.Component {
   }
 
   getDashData() {
-    console.log('getting dash data ... ');
     axios.get('/dashdata')
       .then(({ data }) => {
-        console.log('dash data', data);
         this.setState({ data });
       });
   }
 
   render() {
     console.log('found state data', this.state.data.found);
+    console.log('lost state data', this.state.data.lost);
     if (this.state.location === 'lost') {
       return (<ItemForm setLocation={this.setLocation} type="Lost" />);
     } else if (this.state.location === 'found') {
@@ -49,7 +47,7 @@ class DashBoard extends React.Component {
     }
     return (
       <div>
-        <MenuBar setLocation={this.setLocation} />
+        <MenuBar checkStatus={this.props.checkStatus} setLocation={this.setLocation} />
         <div>
           <FoundItems items={this.state.data ? this.state.data.found : []} />
           <LostItems items={this.state.data ? this.state.data.lost : []} />
