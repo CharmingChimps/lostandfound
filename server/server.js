@@ -5,9 +5,14 @@ const { router } = require('./lib/routes');
 const session = require('express-session');
 
 
-mongoose.connect('mongodb://<dbuser>:<dbpassword>@ds135983.mlab.com:35983/hrnyc9chimps', {
+mongoose.connect('mongodb://hrnyc9chimps:cinnabons@ds135983.mlab.com:35983/hrnyc9chimps', {
   useMongoClient: true,
 });
+
+const db = mongoose.connection;
+
+db.once('open', console.log.bind(console, 'MongoDB open'));
+
 
 const app = express();
 
