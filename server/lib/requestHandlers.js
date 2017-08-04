@@ -37,42 +37,48 @@ exports.getStatus = (req, res) => {
 
 
 exports.postMessages = (req, res) => {
-  //user id
-  var user_id = req.body.user_id;
-  //to user id
-  var to_user_id = req.body.to_user_id;
-  //req.body = message
-  var message = req.body.text;
-  var messageObj = {
+  // user id
+  const user_id = req.body.user_id;
+  // to user id
+  const to_user_id = req.body.to_user_id;
+  // req.body = message
+  const message = req.body.text;
+  const messageObj = {
     user_id: user_id,
     text: message,
     to_user_id: to_user_id
   }
-  //send to server
-  // console.log('INSIDE POST MESSAGE: ', req.body.text);
+  // send to server
+  //  console.log('INSIDE POST MESSAGE: ', req.body.text);
   db.messages.create(messageObj, (err) => {
     if (err) throw err;
-    // must still write here check data base as a call back
+    //  must still write here check data base as a call back
   });
   res.send('success on post messages updated');
 };
 
 exports.getMessages = (req, res) => {
-  //user id
-  var user_id = req.query.user_id;
-  //to user id
-  var to_user_id = req.query.to_user_id;
-  //req.body = message
-  db.messages.find({
-    user_id: user_id,
-    to_user_id: to_user_id
-  })
-  .limit(20)
-  .sort({date: 'desc'})
-  .then((items) => {
-    res.send(items);
-    // console.log('data in getMessages()', data)
-  })
+  // user id
+  const user_id = req.query.user_id;
+  // to user id
+  const to_user_id = req.query.to_user_id;
+  // req.body = message
+  db.messages.find({ $or: [
+    {
+      user_id: user_id,
+      to_user_id: to_user_id,
+    },
+    {
+      user_id: to_user_id,
+      to_user_id: user_id,
+    },
+  ] })
+    .limit(20)
+    .sort({ date: 'desc' })
+    .then((items) => {
+      console.log(items);
+      res.send(items);
+    });
 
   // console.log('getMessages', req.body);
   // getUserId(req.session.user, (userId) => {

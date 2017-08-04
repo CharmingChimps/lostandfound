@@ -94,6 +94,7 @@ class Messenger extends React.Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
+        <button onClick={this.props.setLocation.bind(this, 'dash')}>Back</button>
       </div>
     );
   }
