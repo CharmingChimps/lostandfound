@@ -32,7 +32,7 @@ class Messenger extends React.Component {
       url: '/messages',
       data: messageObj,
     });
-    //console.log('messgae obj here', messageObj);
+    //console.log('messgae obj handle post', messageObj);
     this.handleGet();
   }
   //CHANGE TO GET FROM SERVER
@@ -41,12 +41,10 @@ class Messenger extends React.Component {
     axios({
       method:'GET',
       url: '/messages',
-      params: {
-        to_user: '420'
-      }
     })
     .then((res) => {
-      console.log('res.data in handleGet', res.data)
+      this.setState({messages: res.data})
+      // console.log('res.data in handleGet', res.data)
     })
   }
 
@@ -59,13 +57,12 @@ class Messenger extends React.Component {
     e.preventDefault();
     const message = this.state.message;
     const messageObj = {
-      user_id: 1,
-      loser_id: 2,
       text: message,
     };
-    this.setState({ messages: [...this.state.messages, message], message: '' });
+    // this.setState({ messages: [...this.state.messages, message], message: '' });
+    this.setState({ message: '' });
     this.handlePost(messageObj);
-    this.handleGet();
+    // this.handleGet();
   }
 
   render() {
