@@ -16,6 +16,24 @@ class LostItemsEntry extends React.Component {
               <li>{this.props.description.condition || '*condition unspecified*'}</li>
             </ul>
           </li>
+          {this.props.matches.map(match =>
+            (
+              <li>Match:
+                <ul>
+                  <li>{match.name}</li>
+                  <li>{match.location}</li>
+                  <li>Description:
+                    <ul>
+                      <li>{match.description.color || '*color unspecified*'}</li>
+                      <li>{match.description.brand || '*brand unspecified*'}</li>
+                      <li>{match.description.size || '*size unspecified*'}</li>
+                      <li>{match.description.condition || '*condition unspecified*'}</li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+            )
+          )}
         </ul>
       </div>
     );

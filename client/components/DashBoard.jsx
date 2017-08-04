@@ -13,10 +13,15 @@ class DashBoard extends React.Component {
     this.state = {
       location: 'dash',
       data: '',
+      chat: {
+        user: null,
+        toUser: null,
+      },
     };
 
     this.setLocation = this.setLocation.bind(this);
     this.getDashData = this.getDashData.bind(this);
+    this.goToMessenger = this.goToMessenger.bind(this);
 
     this.getDashData();
   }
@@ -35,11 +40,14 @@ class DashBoard extends React.Component {
       });
   }
 
+  goToMessenger(user, toUser) {
+    this.setLocation('messenger');
+    this.setState({ chat: { user, toUser } });
+  }
+
   render() {
-    console.log('found state data', this.state.data.found);
-    console.log('lost state data', this.state.data.lost);
     if (this.state.location === 'lost') {
-      return (<ItemForm setLocation={this.setLocation} type="Lost" />);
+      return (<ItemForm type="Lost" />);
     } else if (this.state.location === 'found') {
       return (<ItemForm setLocation={this.setLocation} type="Found" />);
     } else if (this.state.location === 'messenger') {
@@ -49,8 +57,12 @@ class DashBoard extends React.Component {
       <div>
         <MenuBar checkStatus={this.props.checkStatus} setLocation={this.setLocation} />
         <div>
-          <FoundItems items={this.state.data ? this.state.data.found : []} />
-          <LostItems items={this.state.data ? this.state.data.lost : []} />
+          <FoundItems items={this.state.data ? this.state.data.found : []}
+            goToMessenger={this.goToMessenger}
+          />
+          <LostItems items={this.state.data ? this.state.data.lost : []}
+            goToMessenger={this.goToMessenger}
+          />
         </div>
       </div>
     );
