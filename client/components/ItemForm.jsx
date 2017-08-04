@@ -22,7 +22,7 @@ class ItemForm extends React.Component {
 
   handleChange(e) {
     const target = e.target;
-    const obj = {};
+    const obj = this.state.itemData;
     obj[target.name] = target.value;
     this.setState({ itemData: obj });
   }

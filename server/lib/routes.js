@@ -3,6 +3,7 @@ const signupHandler = require('../lib/controllers/signupHandler');
 const loginHandler = require('../lib/controllers/loginHandler');
 const dashDataHandler = require('../lib/controllers/dashDataHandler');
 const requestHandlers = require('./requestHandlers');
+const utils = require('./utils');
 
 const router = express.Router();
 
@@ -10,6 +11,8 @@ const router = express.Router();
 router.post('/signup', signupHandler);
 
 router.get('/login', loginHandler);
+router.get('/logout', utils.destroySession);
+
 router.post('/lostitem', requestHandlers.postLostItem);
 router.post('/founditem', requestHandlers.postFoundItem);
 

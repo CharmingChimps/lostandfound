@@ -1,9 +1,18 @@
 import React from 'react';
+import axios from 'axios';
 
 class MenuBar extends React.Component {
   constructor(props) {
     super(props);
+
+    this.logout = this.logout.bind(this);
   }
+
+  logout() {
+    axios.get('/logout')
+      .then(res => this.props.checkStatus());
+  }
+
   render() {
     const barStyle = {
       display: 'flex',
@@ -16,7 +25,7 @@ class MenuBar extends React.Component {
         <button onClick={this.props.setLocation.bind(this, 'lost')}>Lost An Item</button>
         <button onClick={this.props.setLocation.bind(this, 'found')}>Found An Item</button>
         <button onClick={this.props.setLocation.bind(this, 'messenger')}>Messenger</button>
-        <p>usericon</p>
+        <button onClick={this.logout}>Logout</button>
       </div>
     );
   }

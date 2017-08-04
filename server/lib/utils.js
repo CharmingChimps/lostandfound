@@ -12,3 +12,7 @@ exports.createNewSession = (req, res, name) => {
     res.send('good session');
   });
 };
+
+exports.destroySession = (req, res) => {
+  req.session.destroy(res.send.bind(res));
+};
