@@ -3,7 +3,6 @@ import FoundItemsEntry from './FoundItemsEntry.jsx';
 
 class FoundItems extends React.Component {
   render() {
-    console.log(this.props.items);
     return (
       <div>
         <h2>Found Items</h2>

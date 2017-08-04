@@ -30,6 +30,11 @@ class LostItemsEntry extends React.Component {
                       <li>{match.description.condition || '*condition unspecified*'}</li>
                     </ul>
                   </li>
+                  <li><button
+                    onClick={() => {
+                      this.props.goToMessenger(this.props.userId, match.user_id);
+                    }}
+                  >Messenger</button></li>
                 </ul>
               </li>
             )
