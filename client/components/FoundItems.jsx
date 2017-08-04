@@ -1,17 +1,7 @@
 import React from 'react';
 import FoundItemsEntry from './FoundItemsEntry.jsx';
 
-const myFoundItems = [
-  { name: 'goldtooth' },
-  { name: 'marbles' },
-  { name: 'ring' },
-];
-
 class FoundItems extends React.Component {
-  constructor(props) {
-    super(props);
-
-  }
   render() {
     console.log('found items', this.props.items);
     return (
@@ -20,7 +10,8 @@ class FoundItems extends React.Component {
         {this.props.items.map(item => (
           <FoundItemsEntry
             name={item.name}
-            key={item.name}
+            location={item.location}
+            description={item.description}
           />
         ))}
       </div>

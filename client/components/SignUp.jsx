@@ -2,26 +2,6 @@ import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const fakeUsers = [
-  {
-    username: 'Chetan',
-    password: 'chetan',
-    email: 'chetan@chetan.com',
-    name: 'ChetanMalhi'
-  },
-  {
-    username: 'Walter',
-    password: 'walter',
-    email: 'walter@walter.com',
-    name: 'WalterShub',
-  },
-  {
-    username: 'Chao',
-    password: 'chao',
-    email: 'chao@chao.com',
-    name: 'yuchao',
-  }];
-
 class SignUp extends React.Component {
   constructor(props) {
     super(props);
@@ -46,7 +26,7 @@ class SignUp extends React.Component {
       name: this.state.name,
     })
       .then((response) => {
-        console.log('new user added', response);
+        this.props.checkStatus();
       });
   }
 
@@ -54,7 +34,6 @@ class SignUp extends React.Component {
     const obj = {};
     obj[event.target.name] = event.target.value;
     this.setState(obj);
-    console.log('testing: changed');
   }
 
   render() {
@@ -70,7 +49,7 @@ class SignUp extends React.Component {
             onChange={this.changeHandler}
           />
           <input
-            type="text"
+            type="password"
             name="password"
             placeholder="password"
             value={this.state.password}
